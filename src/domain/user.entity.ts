@@ -1,6 +1,8 @@
 import { IsDate, IsString } from "@nestjs/class-validator";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Recruitment } from "src/domain/recruit.entity";
 import * as bcrypt from 'bcrypt';
+
 
 @Entity('user')
 export class User{
@@ -32,6 +34,10 @@ export class User{
     @Column({type:"timestamp", nullable:true, default:null})
     @IsDate()
     user_updated: Date;
+
+    @OneToMany(type => Recruitment, recruitment => recruitment.user, { eager: true})
+    recruits: Recruitment[];
+
 
     async validatePassword(password: string): Promise<boolean>{
         let isValid = await bcrypt.compare(password, this.password)
