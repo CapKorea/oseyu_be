@@ -1,4 +1,4 @@
-import { Controller, Param, Body, Post, Res, Req, Get, Delete, UseGuards  } from '@nestjs/common';
+import { Controller, Param, Body, Post, Req, Get, Delete, UseGuards  } from '@nestjs/common';
 import { RecruitDTO } from './dto/recruit.dto';
 import { RecruitService } from './recruit.service';
 import { Request } from 'express';
@@ -7,7 +7,6 @@ import { Recruitment } from '../domain/recruit.entity';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { Logger } from '@nestjs/common/services';
 import { User } from 'src/domain/user.entity';
-import { Response } from 'express';
 
 @Controller('recruit')
 @UseGuards(AuthGuard())

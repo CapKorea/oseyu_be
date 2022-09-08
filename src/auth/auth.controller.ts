@@ -23,7 +23,7 @@ export class AuthController {
 
     // 로그인
     @Post('/login')
-    async signin(@Body() userDTO: UserDTO, @Res() resp: Response): Promise<any>{
+    async signin(@Body() userDTO: UserDTO, @Res() resp: Response): Promise<Response>{
         const jwt = await this.authService.validateUser(userDTO);
         resp.setHeader('Authorization', 'Bearer '+jwt.accessToken);
         return resp.json(jwt); // 로그인 시 토큰 리턴
@@ -32,7 +32,7 @@ export class AuthController {
     // 로그아웃
     @Post('/logout')
     @UseGuards(AuthGuard())
-    async logout(@Req() req: Request, @Res() res: Response): Promise<any>{
+    async logout(@Req() req: Request, @Res() res: Response): Promise<Response>{
         res.setHeader('Set-Cookie', await this.authService.logOut());
         return res.sendStatus(200);
     }
@@ -40,7 +40,7 @@ export class AuthController {
     // 마이페이지 (작성한 글 포함)
     @Get('/mypage')
     @UseGuards(AuthGuard())
-    isAuthenticated(@Req() req: Request): any {
+    isAuthenticated(@Req() req: Request): any{
         const user: any = req.user;
         if(!req.user){
             throw new UnauthorizedException({message: '존재하지 않는 사용자입니다.'});
@@ -50,7 +50,7 @@ export class AuthController {
     // 프로필 정보
     @Get('/profile')
     @UseGuards(AuthGuard())
-    getUser(@Req() req: Request, @Res() resp: Response):any{
+    getUser(@Req() req: Request, @Res() resp: Response): any {
         const user: any=req.user;
         if(!user){
             throw new UnauthorizedException('로그인 필요!');

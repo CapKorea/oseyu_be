@@ -23,7 +23,7 @@ export class AuthService {
     // 새로운 유저 등록
     async registerUser(newUser:UserDTO): Promise<UserDTO>{
         // 이미 등록되어 있는 이메일이 있는지 탐색
-        let userFind: UserDTO = await await this.userService.findByFields({
+        const userFind: UserDTO = await await this.userService.findByFields({
             where: {user_id: newUser.user_id}
         });
         // 탐색되었다면, Bad Request 오류 처리 (HTTP상태 코드 400)
@@ -37,7 +37,7 @@ export class AuthService {
 
     // 로그인
     async validateUser(userDTO: UserDTO): Promise<{accessToken: string} | undefined>{
-        let userFind: User = await this.userService.findByFields({
+        const userFind: User = await this.userService.findByFields({
             where: {user_id: userDTO.user_id}
         })
         const validatePassword = await bcrypt.compare(userDTO.password, userFind.password);

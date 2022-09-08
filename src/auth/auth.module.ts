@@ -7,7 +7,6 @@ import { UserService } from './user.service';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './security/passport.strategy';
-
 @Module({
   imports: [
     TypeOrmExModule.forCustomRepository([UserRepository]),
