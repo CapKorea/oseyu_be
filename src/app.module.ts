@@ -11,7 +11,7 @@ import { RecruitRepository } from './recruit/recruit.repository';
 
 @Module({
   imports: [
-    TypeOrmModule.forRootAsync({ useFactory: ormConfig}),
+    TypeOrmModule.forRootAsync({ useFactory: ormConfig }),
     TypeOrmExModule.forCustomRepository([UserRepository]),
     TypeOrmExModule.forCustomRepository([RecruitRepository]),
     AuthModule,
