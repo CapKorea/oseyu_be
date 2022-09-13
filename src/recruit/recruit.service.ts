@@ -40,4 +40,8 @@ export class RecruitService {
             throw new NotFoundException(`ID(${post_id})의 게시글을 찾을 수 없습니다.`);
         }
     }
+
+    async example(): Promise<string>{
+        return "example";
+    }
 }
