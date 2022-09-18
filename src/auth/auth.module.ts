@@ -7,6 +7,7 @@ import { UserRepository } from "./user.repository";
 import { UserService } from "./user.service";
 import { JwtModule } from "@nestjs/jwt";
 import { PassportModule } from "@nestjs/passport";
+import { KakaoStrategy } from "./kakao.strategy";
 
 @Module({
   imports: [
