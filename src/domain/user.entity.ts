@@ -1,16 +1,15 @@
-import { IsDate, IsString } from "@nestjs/class-validator";
+import { IsDate, IsNumber, IsString, IsEmail } from "@nestjs/class-validator";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Recruitment } from "src/domain/recruit.entity";
-import { IsEmail } from "class-validator";
 
 @Entity("user")
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ unique: true })
-  @IsString()
-  kakaoId: string;
+  @Column({ unique: true, type: "bigint" })
+  @IsNumber()
+  kakaoId: number;
 
   @Column()
   @IsString()
@@ -20,11 +19,19 @@ export class User {
   @IsEmail({ unique: true })
   email: string;
 
-  @Column({ type: "timestamp", nullable: true, default: null })
+  @Column({
+    type: "timestamp",
+    nullable: true,
+    default: () => "CURRENT_TIMESTAMP",
+  })
   @IsDate()
   user_created: Date;
 
-  @Column({ type: "timestamp", nullable: true, default: null })
+  @Column({
+    type: "timestamp",
+    nullable: true,
+    default: () => "CURRENT_TIMESTAMP",
+  })
   @IsDate()
   user_updated: Date;
 
