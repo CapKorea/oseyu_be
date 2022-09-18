@@ -132,6 +132,4 @@ dist
 # TernJS port file
 .tern-port
 
-.development.env
-
 default.yaml
