@@ -1,4 +1,4 @@
-import { JwtStrategy } from "./security/passport.strategy";
+// import { JwtStrategy } from "./security/passport.strategy";
 import { Module } from "@nestjs/common";
 import { TypeOrmExModule } from "src/db/typeorm-ex.decorator";
 import { AuthController } from "./auth.controller";
@@ -8,6 +8,7 @@ import { UserService } from "./user.service";
 import { JwtModule } from "@nestjs/jwt";
 import { PassportModule } from "@nestjs/passport";
 import { KakaoStrategy } from "./kakao.strategy";
+import { HttpModule } from "@nestjs/axios";
 
 @Module({
   imports: [
@@ -17,9 +18,10 @@ import { KakaoStrategy } from "./kakao.strategy";
       signOptions: { expiresIn: "90d" },
     }),
     PassportModule.register({ defaultStrategy: "jwt" }),
+    HttpModule,
   ],
   exports: [],
   controllers: [AuthController],
-  providers: [AuthService, UserService, JwtStrategy],
+  providers: [AuthService, UserService, KakaoStrategy],
 })
 export class AuthModule {}

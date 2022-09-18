@@ -1,29 +1,24 @@
 import { IsDate, IsString } from "@nestjs/class-validator";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Recruitment } from "src/domain/recruit.entity";
+import { IsEmail } from "class-validator";
 
 @Entity("user")
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ unique: true })
   @IsString()
-  user_id: string;
-
-  @Column()
-  password: string;
+  kakaoId: string;
 
   @Column()
   @IsString()
   name: string;
 
   @Column()
-  phone: string;
-
-  @Column("text", { nullable: true, default: null })
-  @IsString()
-  image: string;
+  @IsEmail({ unique: true })
+  email: string;
 
   @Column({ type: "timestamp", nullable: true, default: null })
   @IsDate()
