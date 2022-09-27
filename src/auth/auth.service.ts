@@ -1,28 +1,14 @@
-import {
-  HttpException,
-  HttpStatus,
-  Injectable,
-  UnauthorizedException,
-} from "@nestjs/common";
-import { CreateUserDto } from "./dto/create-user.dto";
-import { LoginUserDto } from "./dto/login-user.dto";
-import { UserService } from "./user.service";
-import * as bcrypt from "bcrypt";
-import { Payload } from "./security/payload.interface";
-import { JwtService } from "@nestjs/jwt";
+import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { UserRepository } from "./user.repository";
 import { Repository } from "typeorm";
-import { User } from "src/domain/user.entity";
-import axios, { HttpService } from "@nestjs/axios";
+import { HttpService } from "@nestjs/axios";
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(UserRepository)
     private userRepository: Repository<UserRepository>,
-    private userService: UserService,
-    private jwtService: JwtService,
     private readonly httpService: HttpService
   ) {}
 
@@ -43,6 +29,9 @@ export class AuthService {
         name: getUserData.kakao_account.profile.nickname,
         email: getUserData.kakao_account.email,
       };
+
+      console.log('유저 정보 : ', user);
+
       const createUser = await this.userRepository.create(user);
       await this.userRepository.save(createUser);
     });

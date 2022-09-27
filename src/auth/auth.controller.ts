@@ -1,19 +1,12 @@
 import {
-  Body,
   Controller,
   Get,
   HttpCode,
-  Post,
   Req,
-  Res,
   UseGuards,
 } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
-import { Request, Response } from "express";
-import { CreateUserDto } from "./dto/create-user.dto";
 import { AuthService } from "./auth.service";
-import { UnauthorizedException } from "@nestjs/common";
-import { UserRepository } from "./user.repository";
 
 @Controller("auth")
 export class AuthController {
@@ -22,7 +15,7 @@ export class AuthController {
   @HttpCode(200)
   @UseGuards(AuthGuard("kakao"))
   async kakaoGetToken(@Req() req) {
-    console.log(req);
+    // console.log(req);
     return { sucess: true };
   }
 
