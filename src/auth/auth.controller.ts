@@ -1,20 +1,44 @@
-import { Body, Controller, Get, Post, Req, Res, UseGuards } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, Post, Response, Req, Res, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { Request, Response } from 'express';
+// import { Request, Response } from 'express';
 import { UserDTO } from './dto/user.dto';
 import { AuthService } from './auth.service';
 import { UnauthorizedException } from '@nestjs/common';
 import { UserRepository } from './user.repository';
+import { KakaoLoginService } from './kakaoLogin.service';
 
 @Controller('auth')
 export class AuthController {
-    constructor(
-        private authService: AuthService,
-        ){
-            this.authService = authService;
-        }
+constructor(
+    private kakaoLoginService : KakaoLoginService){
+        this.kakaoLoginService = kakaoLoginService
+    }
 
-     // 회원가입
+    // 카카오 로그인
+    @Post('/kakaoLogin')
+    async login(@Body() body: any, @Response() res): Promise<any> {
+        try {
+        // 카카오 토큰 조회 후 계정 정보 가져오기
+  
+        const kakao = await this.kakaoLoginService.kakaoLogin();
+    
+        console.log(`kakaoUserInfo : ${JSON.stringify(kakao)}`);
+        if (!kakao.id) {
+            throw new BadRequestException('카카오 정보가 없습니다.');
+        }
+    
+        res.send({
+            user: kakao,
+            message: 'success',
+        });
+        } catch (e) {
+        console.log(e);
+        throw new UnauthorizedException();
+        }
+    }
+
+    /*
+    // 회원가입
     @Post('/signup') 
     async signup(
         @Req() req: Request, @Body() UserDTO: UserDTO): Promise<UserDTO>{
@@ -63,4 +87,5 @@ export class AuthController {
     findAll(): Promise<UserRepository[]>{
         return this.authService.findAllUsers();
     }
+    */
 }

@@ -21,6 +21,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@nestjs/axios": "^0.1.0",
     "@nestjs/class-validator": "^0.13.4",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.2.0",
@@ -31,6 +32,7 @@
     "@nestjs/typeorm": "^9.0.1",
     "@types/bcrypt": "^5.0.0",
     "@types/passport": "^1.0.10",
+    "axios": "^0.27.2",
     "bcrpyt": "^2.0.0",
     "bcrypt": "^5.0.1",
     "cross-env": "^7.0.3",
@@ -39,6 +41,8 @@
     "mysql2": "^2.3.3",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
+    "passport-kakao": "^1.0.1",
+    "qs": "^6.11.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",

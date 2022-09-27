@@ -7,8 +7,12 @@ import { UserService } from './user.service';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './security/passport.strategy';
+import { KakaoLoginService } from './kakaoLogin.service';
+import { HttpModule } from '@nestjs/axios';
+
 @Module({
   imports: [
+    HttpModule,
     TypeOrmExModule.forCustomRepository([UserRepository]),
     JwtModule.register({
       secret: 'SECRET',
@@ -19,6 +23,6 @@ import { JwtStrategy } from './security/passport.strategy';
   ],
   exports: [TypeOrmExModule, PassportModule],
   controllers: [AuthController],
-  providers: [AuthService, UserService, JwtModule, JwtStrategy]
+  providers: [AuthService, UserService, KakaoLoginService, JwtModule, JwtStrategy]
 })
 export class AuthModule {}

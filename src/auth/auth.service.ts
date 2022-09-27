@@ -15,8 +15,8 @@ export class AuthService {
         @InjectRepository(UserRepository)
         private userRepository: Repository<UserRepository>,
         private userService:UserService,
-        private jwtService: JwtService,)
-        {
+        private jwtService: JwtService,
+        ){
             this.userRepository = userRepository
         }
 
