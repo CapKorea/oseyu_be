@@ -29,6 +29,6 @@ export class AuthService {
   async kakaoLogin(userInformation) {
     const user = userInformation;
     console.log(user);
-    return true;
+    return user;
   }
 }
