@@ -22,7 +22,6 @@ export class AuthController {
   @HttpCode(200)
   @UseGuards(AuthGuard("kakao"))
   async kakaoGetToken(@Req() req) {
-    console.log(req);
     return { sucess: true };
   }
 

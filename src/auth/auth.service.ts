@@ -26,27 +26,9 @@ export class AuthService {
     private readonly httpService: HttpService
   ) {}
 
-  async kakaoLogin(userAccessToken) {
-    let user;
-    const headersRequest = {
-      Authorization: `Bearer ${userAccessToken}`,
-    };
-    const result = await this.httpService.get(
-      "https://kapi.kakao.com/v2/user/me",
-      { headers: headersRequest }
-    );
-    result.subscribe(async (res) => {
-      const getUserData = res.data;
-
-      user = {
-        kakaoId: getUserData.id,
-        name: getUserData.kakao_account.profile.nickname,
-        email: getUserData.kakao_account.email,
-      };
-      const createUser = await this.userRepository.create(user);
-      await this.userRepository.save(createUser);
-    });
-
+  async kakaoLogin(userInformation) {
+    const user = userInformation;
+    console.log(user);
     return true;
   }
 }
