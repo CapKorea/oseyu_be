@@ -22,6 +22,7 @@ export class AuthController {
   @HttpCode(200)
   @UseGuards(AuthGuard("kakao"))
   async kakaoGetToken(@Req() req) {
+    console.log(req);
     return { sucess: true };
   }
 
@@ -29,14 +30,18 @@ export class AuthController {
   @HttpCode(200)
   @UseGuards(AuthGuard("kakao"))
   async kakaoLoginCallback(@Req() req) {
-    return this.authService.kakaoLogin(req.user);
+    console.log(req);
+    // const user = req.user;
+    // return this.authService.kakaoLogin(user);
+    return req.user;
   }
 
   @Get("kakao/login")
   @HttpCode(200)
   async kakaoLogin(@Req() req) {
-    const userAccessToken = req.headers["authorization"].split(" ")[1];
-    await this.authService.kakaoLogin(userAccessToken);
+    console.log(req);
+    // const userAccessToken = req.headers["authorization"].split(" ")[1];
+    // await this.authService.kakaoLogin(userAccessToken);
     return { sucess: true };
   }
 }

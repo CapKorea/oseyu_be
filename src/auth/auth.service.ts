@@ -20,15 +20,13 @@ import axios, { HttpService } from "@nestjs/axios";
 export class AuthService {
   constructor(
     @InjectRepository(UserRepository)
-    private userRepository: Repository<UserRepository>,
+    private userRepository: UserRepository,
     private userService: UserService,
     private jwtService: JwtService,
     private readonly httpService: HttpService
   ) {}
 
-  async kakaoLogin(userInformation) {
-    const user = userInformation;
-    console.log(user);
-    return user;
+  async kakaoLogin(user) {
+    return true;
   }
 }
