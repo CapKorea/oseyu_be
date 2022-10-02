@@ -15,14 +15,14 @@ import { AuthService } from "./auth.service";
 import { UnauthorizedException } from "@nestjs/common";
 import { UserRepository } from "./user.repository";
 
-@Controller("auth")
+@Controller("/api/auth")
 export class AuthController {
   constructor(private authService: AuthService) {}
   @Get("/kakao")
   @HttpCode(200)
   @UseGuards(AuthGuard("kakao"))
   async kakaoGetToken(@Req() req) {
-    console.log(req);
+    console.log(req.par);
     return { sucess: true };
   }
 
